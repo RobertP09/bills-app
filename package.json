@@ -4,6 +4,7 @@
 	"description": "Bill tracker",
 	"main": "app.js",
 	"scripts": {
+		"test": "jest",
 		"dev": "nodemon app.js",
 		"start": "node app.js"
 	},
@@ -13,9 +14,17 @@
 	"author": "Robert Perez rp@devrobert.com",
 	"license": "MIT",
 	"devDependencies": {
-		"nodemon": "^2.0.4"
+		"jest": "^26.0.1",
+		"nodemon": "^2.0.4",
+		"supertest": "^4.0.2"
 	},
 	"dependencies": {
 		"express": "^4.17.1"
+	},
+	"jest": {
+		"testEnvironment": "node",
+		"coveragePathIgnorePatterns": [
+			"/node_modules/"
+		]
 	}
 }

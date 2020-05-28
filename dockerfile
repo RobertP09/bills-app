@@ -14,6 +14,6 @@ RUN npm install
 # Buncle app source
 COPY . .
 
-EXPOSE 5000
+EXPOSE 5000:5000
 
-CMD [ "node", "server.js" ]
+CMD [ "node", "app.js" ]
