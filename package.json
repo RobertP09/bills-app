@@ -1,0 +1,21 @@
+{
+	"name": "docker-node-bills",
+	"version": "1.0.0",
+	"description": "Bill tracker",
+	"main": "app.js",
+	"scripts": {
+		"dev": "nodemon app.js",
+		"start": "node app.js"
+	},
+	"keywords": [
+		"Express"
+	],
+	"author": "Robert Perez rp@devrobert.com",
+	"license": "MIT",
+	"devDependencies": {
+		"nodemon": "^2.0.4"
+	},
+	"dependencies": {
+		"express": "^4.17.1"
+	}
+}

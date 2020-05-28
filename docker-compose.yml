@@ -1,0 +1,13 @@
+version: "2.0"
+services:
+    node:
+        image: "node:14.3.0-alpine"
+        user: "node"
+        working_dir: /home/node/app
+        environment:
+            - NODE_ENV=development
+        volumes:
+            - ./:/home/node/app
+        expose:
+            - "5000"
+        command: "npm run dev"
