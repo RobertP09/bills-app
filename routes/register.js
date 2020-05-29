@@ -3,7 +3,7 @@ const Router = express.Router();
 const User = require("../models/User");
 
 Router.get("/", (req, res) => {
-	res.json({ msg: "Welcome to Register" });
+	res.status(200).send("Register Route");
 });
 
 Router.post("/", (req, res) => {
