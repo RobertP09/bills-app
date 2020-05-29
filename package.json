@@ -2,15 +2,19 @@
 	"name": "docker-node-bills",
 	"version": "1.0.0",
 	"description": "Bill tracker",
-	"main": "app.js",
+	"main": "server.js",
 	"scripts": {
 		"test": "jest",
-		"dev": "nodemon app.js",
-		"start": "node app.js"
+		"test:watch": "jest --watch",
+		"dev": "nodemon server.js",
+		"start": "node server.js"
 	},
 	"keywords": [
 		"Express"
 	],
+	"jest": {
+		"testEnvironment": "node"
+	},
 	"author": "Robert Perez rp@devrobert.com",
 	"license": "MIT",
 	"devDependencies": {
@@ -22,11 +26,5 @@
 		"config": "^3.3.1",
 		"express": "^4.17.1",
 		"mongoose": "^5.9.16"
-	},
-	"jest": {
-		"testEnvironment": "node",
-		"coveragePathIgnorePatterns": [
-			"/node_modules/"
-		]
 	}
 }
