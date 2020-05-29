@@ -4,7 +4,7 @@
 	"description": "Bill tracker",
 	"main": "server.js",
 	"scripts": {
-		"test": "jest",
+		"test": "NODE_ENV= jest",
 		"test:watch": "jest --watch",
 		"dev": "nodemon server.js",
 		"start": "node server.js"
@@ -13,7 +13,11 @@
 		"Express"
 	],
 	"jest": {
-		"testEnvironment": "node"
+		"testEnvironment": "node",
+		"verbose": true,
+		"coveragePathIgnorePatterns": [
+			"/node_modules/"
+		]
 	},
 	"author": "Robert Perez rp@devrobert.com",
 	"license": "MIT",
