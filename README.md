@@ -16,4 +16,4 @@ App is designed to help you track your bills, remind you at 10, 20,29 days past 
 
 ## Contact
 
-Can be reached here or at rp@devrobert.com
+Can be reached here or at rp@robertperez.dev
