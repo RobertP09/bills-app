@@ -1,21 +1,50 @@
 const express = require("express");
 const Router = express.Router();
 const User = require("../models/User");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const config = require("config");
 
-Router.get("/", (req, res) => {
-	res.status(200).send("Register Route");
-});
-
-Router.post("/", (req, res) => {
+Router.post("/", async (req, res) => {
 	const { name, email, password } = req.body;
 
-	const user = new User({
-		name,
-		email,
-		password,
-	});
+	try {
+		let user = await User.findOne({ email: email });
 
-	res.send(user).status(200);
+		if (user) res.status(400).json({ msg: "Email already exists" });
+
+		user = new User({
+			name,
+			email,
+			password,
+		});
+
+		const salt = await bcrypt.genSalt(11);
+		user.password = await bcrypt.hash(password, salt);
+
+		await user.save();
+
+		const payload = {
+			user: {
+				id: user.id,
+			},
+		};
+
+		jwt.sign(
+			payload,
+			config.get("jwtSecret"),
+			{
+				expiresIn: 36000,
+			},
+			(err, token) => {
+				if (err) throw err;
+				res.status(201).json({ token });
+			}
+		);
+	} catch (err) {
+		console.error(err.message);
+		res.status(500).send("Server Error");
+	}
 });
 
 module.exports = Router;

@@ -10,10 +10,9 @@ app.get("/", (req, res) => {
 });
 
 // Route imports
-const userRoutes = require("./routes/user");
-const registerRoutes = require("./routes/register");
-app.use("/user", userRoutes);
-app.use("/register", registerRoutes);
+app.use("/auth", require("./routes/auth"));
+app.use("/user", require("./routes/user"));
+app.use("/register", require("./routes/register"));
 
 // Serve static assets in prod
 if (process.env.NODE_ENV === "production") {
