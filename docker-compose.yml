@@ -1,4 +1,5 @@
 version: "2.0"
+
 services:
     node:
         image: "node:14.3.0-alpine"

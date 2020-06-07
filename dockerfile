@@ -1,19 +1,16 @@
 FROM node:12.17.0-alpine3.11
 
-# Create app directory
+EXPOSE 5000
+
 WORKDIR /usr/src/app
 
-# Install app dependencies
-# a wildcard is used to ensure both package.json nad package-lock are copied
-COPY package*.json ./
+COPY package.json package-lock.json* ./
+RUN mkdir app && chown -R node:node .
+USER node
+RUN npm install && npm cache clean --force
 
-RUN npm install
-# if you're building your code for production
-# RUN npm ci --only=production
 
-# Buncle app source
-COPY . .
+WORKDIR /node/app
 
-EXPOSE 5000:5000
-
-CMD [ "node", "app.js" ]
+COPY --chown=node:node . .
+CMD [ "node", "server.js" ]
