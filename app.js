@@ -13,6 +13,7 @@ app.get("/", (req, res) => {
 app.use("/auth", require("./routes/auth"));
 app.use("/user", require("./routes/user"));
 app.use("/register", require("./routes/register"));
+app.use("/bill", require("./routes/bill"));
 
 // Serve static assets in prod
 if (process.env.NODE_ENV === "production") {
