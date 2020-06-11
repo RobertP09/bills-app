@@ -12,6 +12,7 @@ Router.post("/", auth, async (req, res) => {
 
 	try {
 		const bill = new Bill({
+			user: req.user.id,
 			name,
 			date,
 			amount,
