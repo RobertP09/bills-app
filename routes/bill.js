@@ -8,7 +8,7 @@ Router.get("/", auth, (req, res) => {
 });
 
 Router.post("/", auth, async (req, res) => {
-	const { name, date, amount } = req.body;
+	const { name, date, amount, recurring } = req.body;
 
 	try {
 		const bill = new Bill({
@@ -16,6 +16,7 @@ Router.post("/", auth, async (req, res) => {
 			name,
 			date,
 			amount,
+			recurring,
 		});
 		console.log(bill);
 		await bill.save();

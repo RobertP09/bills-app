@@ -16,6 +16,10 @@ const BillSchema = mongoose.Schema({
 		type: Number,
 		required: true,
 	},
+	recurring: {
+		type: Boolean,
+		required: true,
+	},
 });
 
 module.exports = mongoose.model("bill", BillSchema);
