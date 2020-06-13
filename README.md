@@ -1,6 +1,6 @@
 # Important Bills
 
-App is designed to help you track your bills, remind you at 10, 20,29 days past due (30 days past due reports to credit agencies which is the true evil).
+App is designed to help you track your bills, it will send you a reminder before it gets past due (30 days past due reports to credit agencies which is the true evil).
 
 ---
 

@@ -1,6 +1,7 @@
 const nodemailer = require("nodemailer");
 
-const sendNotification = async () => {
+const sendNotification = async (userInfo) => {
+	const { email } = userInfo;
 	try {
 		// Creates test account if needed
 		let testAccount = await nodemailer.createTestAccount();
@@ -18,14 +19,14 @@ const sendNotification = async () => {
 		// Send mail
 		let info = await transporter.sendMail({
 			from: "Robert P <foo@example.com>",
-			to: "rober9790@gmail.com",
-			subject: "Test email",
-			text: "Notfication of payment",
-			html: `<p>Payment Due in X Days</p>`,
+			to: `${email}`,
+			subject: `${Name} Late`,
+			text: `${Name} Is due and will be reported to the Credit Agencies in 30 days`,
+			html: `<p>Payment Due in 30 Days</p>`,
 		});
 
-		console.log("Message sent: %s", info.messageId);
-		console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+		// console.log("Message sent: %s", info.messageId);
+		// console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 	} catch (err) {
 		console.error(err.message);
 		throw new Error("Problem sending email");
