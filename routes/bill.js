@@ -1,13 +1,33 @@
 const express = require("express");
-const Router = express.Router();
+const router = express.Router();
 const Bill = require("../models/Bill");
 const auth = require("../middleware/auth");
+const sendNotification = require("../utils/mailer");
 
-Router.get("/", auth, (req, res) => {
-	res.json({ msg: "Getting bills" });
+// @route	GET /bill
+// @desc	Gets all bills for user
+// @access	Private
+router.get("/", auth, async (req, res) => {
+	try {
+		console.log(req.user.id);
+
+		const bills = await Bill.find({ user: req.user.id });
+		//console.log(bills);
+		res.send(bills);
+	} catch (err) {
+		console.error(err.message);
+		let response = [
+			err.message,
+			{ completed: "Failure", msg: "Server Error" },
+		];
+		res.status(500).send(response);
+	}
 });
 
-Router.post("/", auth, async (req, res) => {
+// @route	POST /bill
+// @desc	Registers a bill to DB
+// @access	Private
+router.post("/", auth, async (req, res) => {
 	const { name, date, amount, recurring } = req.body;
 
 	try {
@@ -18,22 +38,32 @@ Router.post("/", auth, async (req, res) => {
 			amount,
 			recurring,
 		});
-		console.log(bill);
+		//console.log(bill);
 		await bill.save();
-		let response = [bill, { msg: "Bill Created" }];
+		let response = [bill, { completed: "Success", msg: "Bill Created" }];
 		res.status(201).send(response);
 	} catch (err) {
 		console.error(err.message);
+		let response = [
+			err.message,
+			{ completed: "Failure", msg: "Server Error" },
+		];
 		res.status(500).send("Server Error");
 	}
 });
 
-Router.put("/:d", auth, (req, res) => {
+// @route	PUT /bill/:id
+// @desc	Updates a specific bill
+// @access	Private
+router.put("/:id", auth, (req, res) => {
 	res.json({ msg: "Posting bills" });
 });
 
-Router.delete("/:id", auth, (req, res) => {
+// @route	DELETE /bill/:id
+// @desc	Deletes a specific bill
+// @access	Private
+router.delete("/:id", auth, (req, res) => {
 	res.json({ msg: "Deleting bill" });
 });
 
-module.exports = Router;
+module.exports = router;

@@ -1,17 +1,21 @@
 const express = require("express");
-const Router = express.Router();
+const router = express.Router();
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const config = require("config");
 
-Router.post("/", async (req, res) => {
+// @route	POST /register
+// @desc	Creates user in Database
+// @access	Public
+
+router.post("/", async (req, res) => {
 	const { name, email, password } = req.body;
 
 	try {
 		let user = await User.findOne({ email: email });
 
-		if (user) res.status(400).json({ msg: "Email already exists" });
+		if (user) res.status(400).json({ msg: "Account already exists" });
 
 		user = new User({
 			name,
@@ -47,4 +51,4 @@ Router.post("/", async (req, res) => {
 	}
 });
 
-module.exports = Router;
+module.exports = router;

@@ -1,8 +1,11 @@
 const express = require("express");
-const Router = express.Router();
+const router = express.Router();
 
-Router.get("/", (req, res) => {
+// @route	/user
+// @desc	Get user Info - Dashboard
+// @access	Private
+router.get("/", (req, res) => {
 	res.json({ msg: "Welcome to User" });
 });
 
-module.exports = Router;
+module.exports = router;

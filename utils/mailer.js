@@ -1,7 +1,7 @@
 const nodemailer = require("nodemailer");
 
 const sendNotification = async (userInfo) => {
-	const { email } = userInfo;
+	const { email, daysToDue } = userInfo;
 	try {
 		// Creates test account if needed
 		let testAccount = await nodemailer.createTestAccount();
@@ -22,7 +22,7 @@ const sendNotification = async (userInfo) => {
 			to: `${email}`,
 			subject: `${Name} Late`,
 			text: `${Name} Is due and will be reported to the Credit Agencies in 30 days`,
-			html: `<p>Payment Due in 30 Days</p>`,
+			html: `<p>Payment Due in ${daysToDue} Days</p>`,
 		});
 
 		// console.log("Message sent: %s", info.messageId);

@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const config = require("config");
 const auth = require("../middleware/auth");
 
-// @route    GET api/auth
+// @route    GET /auth
 // @desc     Get a user
 // @access   Private
 router.get("/", auth, async (req, res) => {
@@ -19,8 +19,8 @@ router.get("/", auth, async (req, res) => {
 	}
 });
 
-// @route    POST api/auth
-// @desc     Auth user & get token
+// @route    POST /auth
+// @desc     Authenticate user & get token
 // @access   Public
 router.post("/", async (req, res) => {
 	const { email, password } = req.body;
