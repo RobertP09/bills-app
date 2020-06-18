@@ -1,7 +1,7 @@
 const nodemailer = require("nodemailer");
 
 const sendNotification = async (userInfo) => {
-	const { email, daysToDue } = userInfo;
+	const { email, billName, daysTillDue } = userInfo;
 	try {
 		// Creates test account if needed
 		let testAccount = await nodemailer.createTestAccount();
@@ -18,11 +18,11 @@ const sendNotification = async (userInfo) => {
 
 		// Send mail
 		let info = await transporter.sendMail({
-			from: "Robert P <foo@example.com>",
+			from: "Bill-Reminder <bill-reminder@example.com>",
 			to: `${email}`,
-			subject: `${Name} Late`,
-			text: `${Name} Is due and will be reported to the Credit Agencies in 30 days`,
-			html: `<p>Payment Due in ${daysToDue} Days</p>`,
+			subject: `${billName} is due soon`,
+			text: `${billName} Is due and will be reported to the Credit Agencies in 30 days`,
+			html: `<p>Payment Due in ${daysTillDue} Days</p>`,
 		});
 
 		// console.log("Message sent: %s", info.messageId);
