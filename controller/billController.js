@@ -1,5 +1,5 @@
 const Bill = require("../models/Bill");
-const sendNotification = require("../utils/mailer");
+const sendNotification = require("../services/mailer");
 
 const bill_get = async (req, res) => {
 	try {
